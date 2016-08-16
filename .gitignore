@@ -4,3 +4,4 @@ springIntegrationClient/target/
 springIntegrationServer/springIntegrationServer.iml
 springIntegrationServer/target/
 springIntegration.iml
+target/

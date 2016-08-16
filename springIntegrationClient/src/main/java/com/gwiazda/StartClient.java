@@ -35,31 +35,10 @@ public class StartClient {
         public String exchange(String out);
     }
 
-    /**
-     *
-     * use the one below to route message via http /receiveGateway
-     * @return
-     */
-
     @Bean
     IntegrationFlow httpOut(){
       return f -> f.handle(Http.outboundGateway("http://localhost:8080/receiveGateway")
       .expectedResponseType(String.class));
     }
 
-    /**
-     *
-     * use this one to connect using rabbit on standard 127.0.0.1 port 5672
-     */
-
-//    @Bean
-//    IntegrationFlow httpOut(RabbitTemplate rabbitTemplate){
-//        return f -> f.handle(Amqp.outboundGateway(rabbitTemplate).routingKey("mojKlucz").exchangeName("mojaNowa"));
-//    }
-
-//    public RabbitTemplate rabbitTemplate() {
-//        RabbitTemplate template = new RabbitTemplate(connectionFactory());
-//        template.setRoutingKey(this.helloWorldQueueName);
-//        return template;
-//    }
 }

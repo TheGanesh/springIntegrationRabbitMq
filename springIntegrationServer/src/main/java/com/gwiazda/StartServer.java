@@ -19,7 +19,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 /**
- * Created by michal on 13.08.16.
+ * Created by michal.gwiazda on 13.08.16.
  */
 
 @SpringBootApplication
@@ -28,7 +28,6 @@ import java.util.concurrent.Executor;
 public class StartServer {
     public static void main(String[] args) throws Exception{
         ConfigurableApplicationContext context = SpringApplication.run(StartServer.class, args);
-        System.out.println("Visit localhost:8080/integration to vie json");
         System.out.println("Hit enter to terminate");
         System.in.read();
         context.close();
@@ -60,7 +59,7 @@ public class StartServer {
      * If your RabbitMq instance does not run on localhost with standard port 5672 you have to:
      * 1. Remove below Bean (amqp() ).
      * 2. Uncomment 2 beans that are now commented (amqp() and connectionFactory() )
-     * 3. Provide your own host and port to as a parameter to CachingConnectionFactory (in place of "192.168.99.100", 5672)
+     * 3. Provide your RabbitMq host and port as a parameter to CachingConnectionFactory (in place of "192.168.99.100", 5672)
      */
 
     @Bean
