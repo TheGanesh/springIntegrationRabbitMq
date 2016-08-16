@@ -1,6 +1,5 @@
 package com.gwiazda;
 
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +17,6 @@ import org.springframework.integration.splitter.DefaultMessageSplitter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by michal on 13.08.16.
@@ -27,9 +25,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 @SpringBootApplication
 @IntegrationComponentScan
 
-public class startSpring {
+public class StartServer {
     public static void main(String[] args) throws Exception{
-        ConfigurableApplicationContext context = SpringApplication.run(startSpring.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(StartServer.class, args);
         System.out.println("Visit localhost:8080/integration to vie json");
         System.out.println("Hit enter to terminate");
         System.in.read();
@@ -59,8 +57,8 @@ public class startSpring {
     }
 
     /**
-     * If your RabbitMq instance is not running on localhost with standard port 5672 you have to:
-     * 1. Delete below Bean (amqp() ).
+     * If your RabbitMq instance does not run on localhost with standard port 5672 you have to:
+     * 1. Remove below Bean (amqp() ).
      * 2. Uncomment 2 beans that are now commented (amqp() and connectionFactory() )
      * 3. Provide your own host and port to as a parameter to CachingConnectionFactory (in place of "192.168.99.100", 5672)
      */

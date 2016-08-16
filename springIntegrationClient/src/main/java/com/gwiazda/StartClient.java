@@ -1,6 +1,5 @@
 package com.gwiazda;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,10 +17,10 @@ import java.util.Scanner;
 
 @SpringBootApplication
 @IntegrationComponentScan
-public class startClient {
+public class StartClient {
 
     public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext context = SpringApplication.run(startClient.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(StartClient.class, args);
         Gateway gate = context.getBean(Gateway.class);
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
