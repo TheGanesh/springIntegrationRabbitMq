@@ -58,26 +58,45 @@ public class startSpring {
         return exec;
     }
 
+    /**
+     * If your RabbitMq instance is not running on localhost with standard port 5672 you have to:
+     * 1. Delete below Bean (amqp() ).
+     * 2. Uncomment 2 beans that are now commented (amqp() and connectionFactory() )
+     * 3. Provide your own host and port to as a parameter to CachingConnectionFactory (in place of "192.168.99.100", 5672)
+     */
+
     @Bean
     public IntegrationFlow amqp(ConnectionFactory connectionFactory){
 
         return IntegrationFlows.from(Amqp.inboundGateway(connectionFactory, "foo"))
                 .route("payload.substring(0, 3)", r -> r
                         .resolutionRequired(false)
-                .subFlowMapping("foo", s -> s.<String, String>transform(String::toUpperCase))
-                .subFlowMapping("bar", s -> s.<String, String>transform(p -> p + p)))
+                        .subFlowMapping("foo", s -> s.<String, String>transform(String::toUpperCase))
+                        .subFlowMapping("bar", s -> s.<String, String>transform(p -> p + p)))
 //                .<String, String>transform(String::toUpperCase)
                 .get();
     }
 
-    @Bean
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory =
-                new CachingConnectionFactory("localhost");
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
-        return connectionFactory;
-    }
+//    @Bean
+//    public IntegrationFlow amqp(){
+//
+//        return IntegrationFlows.from(Amqp.inboundGateway(connectionFactory(), "foo"))
+//                .route("payload.substring(0, 3)", r -> r
+//                        .resolutionRequired(false)
+//                .subFlowMapping("foo", s -> s.<String, String>transform(String::toUpperCase))
+//                .subFlowMapping("bar", s -> s.<String, String>transform(p -> p + p)))
+////                .<String, String>transform(String::toUpperCase)
+//                .get();
+//    }
+
+//    @Bean
+//    public ConnectionFactory connectionFactory() {
+//        CachingConnectionFactory connectionFactory =
+//                new CachingConnectionFactory("192.168.99.100", 5672);
+//        connectionFactory.setUsername("guest");
+//        connectionFactory.setPassword("guest");
+//        return connectionFactory;
+//    }
 
     @Bean
     DefaultMessageSplitter commaSplitter(){
